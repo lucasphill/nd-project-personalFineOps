@@ -3,12 +3,12 @@ services:
     build: ./app/
     container_name: node_app
     environment:
-      MONGO_URI: ${ secrets.CONNECTION_STRING }
-      DEEPSEEK_API_KEY: ${ secrets.DEEPSEEK_API_KEY }
-      DEEPSEEK_API_URL: ${ secrets.DEEPSEEK_API_URL }
-      OPENAI_API_KEY: ${ secrets.OPENAI_API_KEY }
-      OPENAI_API_URI: ${ secrets.OPENAI_API_URI }
-      TELEGRAM_TOKEN: ${ secrets.TELEGRAM_TOKEN }
+      MONGO_URI: ${ CONNECTION_STRING }
+      DEEPSEEK_API_KEY: ${ DEEPSEEK_API_KEY }
+      DEEPSEEK_API_URL: ${ DEEPSEEK_API_URL }
+      OPENAI_API_KEY: ${ OPENAI_API_KEY }
+      OPENAI_API_URI: ${ OPENAI_API_URI }
+      TELEGRAM_TOKEN: ${ TELEGRAM_TOKEN }
     ports:
       - "3000:3000"
     depends_on:

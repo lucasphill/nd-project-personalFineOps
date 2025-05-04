@@ -25,7 +25,8 @@ jobs:
 
     strategy:
       matrix:
-        node_version: ['22', '20', '18']
+        # node_version: ['22', '20', '18']
+        node_version: latest
         os: ['ubuntu-latest']
     steps:
     - uses: actions/checkout@v3
