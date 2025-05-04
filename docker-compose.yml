@@ -2,7 +2,7 @@ services:
   app:
     build: ./app/
     container_name: node_app
-    env:
+    environment:
       MONGO_URI: ${ secrets.CONNECTION_STRING }
       DEEPSEEK_API_KEY: ${ secrets.DEEPSEEK_API_KEY }
       DEEPSEEK_API_URL: ${ secrets.DEEPSEEK_API_URL }
@@ -20,7 +20,7 @@ services:
     image: mongo:latest
     container_name: mongo_db
     restart: always
-    env:
+    environment:
       MONGO_INITDB_ROOT_USERNAME: ${ MONGO_INITDB_ROOT_USERNAME }
       MONGO_INITDB_ROOT_PASSWORD: ${ MONGO_INITDB_ROOT_PASSWORD }
       MONGO_INITDB_DATABASE: ${ MONGO_INITDB_DATABASE }
