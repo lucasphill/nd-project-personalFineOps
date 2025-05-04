@@ -108,13 +108,27 @@ app.get("/expenses", async(req, res) => {
 app.post("/webhook", async(req, res) => {
     const message = req.body.message?.text || '';
     const chatId = req.body.message?.chat?.id;
+    try {
+        await axios.post(`https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`, {
+            chat_id: chatId,
+            text: `✅ Mensagem recebida com sucesso! - ${message}`
+        });
+        await Expenses.create(message);
+        console.log(message)
+        res.status(200).end();
+    } catch (error) {
+        console.log("Error in webhook", error);
+        res.send({ error: error});
+        if (chatId) {
+            await axios.post(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+                chat_id: chatId,
+                text: `❌ Erro ao processar seu registro: ${error}`
+            });
+        }
+        res.status(500).end();
+    }
 
-    await axios.post(`https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`, {
-      chat_id: chatId,
-      text: `✅ Mensagem recebida com sucesso! - ${message}`
-    });
-
-    res.status(200).end();
+    
 })
 
 app.listen(PORT, () => {
