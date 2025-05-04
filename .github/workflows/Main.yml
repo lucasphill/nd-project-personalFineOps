@@ -47,6 +47,6 @@ jobs:
       run: npm test
 
   docker:
-    needs: build
+    needs: test
     uses: ./.github/workflows/Docker.yml
     secrets: inherit
