@@ -7,7 +7,7 @@ on:
     branches: [ '*' ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     env:
       # App .env
@@ -29,21 +29,22 @@ jobs:
         node_version: ['latest']
         os: ['ubuntu-latest']
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v3.9.1
-      with:
-        node-version: ${{ matrix.node_version }}          
+    - uses: actions/checkout@v3      
       
     - name: Create MongoDB
       run: docker compose up mongo -d --build
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node_version }}  
+        cache: 'npm'
+
     - name: Install dependencies
       run: npm install
 
-    - name: Build
-      run: node index.js
+    - name: Test
+      run: npm test
 
   docker:
     needs: build

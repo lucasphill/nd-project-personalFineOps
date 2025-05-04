@@ -3,10 +3,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import axios from "axios";
 import Expenses from "./models/Expenses.js";
+import app from "./app.js";
 
 dotenv.config();
 
-const app = express();
 const PORT = 3000;
 
 app.use(express.json());
@@ -16,15 +16,12 @@ const conn = async() => {
         await mongoose.connect(process.env.STRING_CONNECTION);
         console.log("MongoDB connected successfully");
     } catch (error) {
+        console.log(process.env.STRING_CONNECTION);
         console.log("MongoDB connection error: ", error);
     }
 }
 
 conn();
-
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-})
 
 app.post("/expenses", async(req, res) => {
     try {
