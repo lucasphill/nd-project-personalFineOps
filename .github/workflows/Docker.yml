@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # App .env
-      MONGO_URI: ${{ secrets.CONNECTION_STRING }}
-      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-      DEEPSEEK_API_URL: ${{ secrets.DEEPSEEK_API_URL }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      OPENAI_API_URI: ${{ secrets.OPENAI_API_URI }}
-      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      # MONGO_URI: ${{ secrets.CONNECTION_STRING }}
+      # DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      # DEEPSEEK_API_URL: ${{ secrets.DEEPSEEK_API_URL }}
+      # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      # OPENAI_API_URI: ${{ secrets.OPENAI_API_URI }}
+      # TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
 
-      # DB .env
-      MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
-      MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
-      MONGO_INITDB_DATABASE: ${{ secrets.MONGO_INITDB_DATABASE }}
+      # # DB .env
+      # MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
+      # MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
+      # MONGO_INITDB_DATABASE: ${{ secrets.MONGO_INITDB_DATABASE }}
 
     steps:
     - uses: actions/checkout@v3
@@ -43,5 +43,8 @@ jobs:
     - name: Push Docker image to ECR
       run: docker push ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ secrets.IMAGE_TAG }}
 
-    
-          
+
+  # deploy:
+  #   needs: docker
+  #   uses: ./.github/workflows/Deploy.yml
+  #   secrets: inherit
