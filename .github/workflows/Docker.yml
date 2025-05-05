@@ -6,7 +6,7 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    env:
+    # env:
       # App .env
       # MONGO_URI: ${{ secrets.CONNECTION_STRING }}
       # DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
